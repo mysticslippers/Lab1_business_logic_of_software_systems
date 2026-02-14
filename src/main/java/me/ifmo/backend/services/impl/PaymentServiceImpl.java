@@ -46,7 +46,6 @@ public class PaymentServiceImpl implements PaymentService {
 
         Payment payment = paymentRepository.findByEnrollment_Id(enrollmentId).orElse(null);
         if (payment != null) {
-            // если payment уже есть — просто возвращаем, но enrollment переводим в WAITING_PAYMENT (если вдруг NEW)
             if (enrollment.getStatus() == EnrollmentStatus.NEW) {
                 enrollment.setStatus(EnrollmentStatus.WAITING_PAYMENT);
                 enrollmentRepository.save(enrollment);
